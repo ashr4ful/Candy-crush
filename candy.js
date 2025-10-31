@@ -9,7 +9,7 @@ const ROW = 9
 const COL = 9
 
 let squares = []
-const candyColors = ['red', 'yellow', 'orange', 'purple', 'green', 'blue']
+const candyColors = ['Red', 'Yellow', 'Orange', 'Purple', 'Green', 'Blue']
 
 let score = 0
 let movesLeft = 20
