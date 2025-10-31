@@ -1,0 +1,345 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+  word-wrap: break-word;
+}
+
+:root {
+  --size :31rem;
+}
+
+body{
+  background: #0F172A;
+}
+
+
+
+
+
+.container {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-container {
+  backdrop-filter: blur(20px);
+  background: transparent;
+  
+  background-color: rgba(255,255,255,0.08);
+  background-color: lightblue;
+  border: 2px solid slategray;
+  border-radius: 10px;
+  margin: 0 auto;
+  
+}
+
+.game {
+  width: var(--size);
+  height :var(--size);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.game div {
+  width: calc(var(--size)/9);
+  height: calc(var(--size)/9);
+  cursor: grab;
+}
+
+.game div:active {
+  cursor: grabbing;
+}
+
+h1, #score {
+  color: #fff;
+}
+
+
+.scoreboard {
+  backdrop-filter: blur(20px);
+  background: linear-gradient(135deg, 
+    rgba(30, 41, 59, 0.8), 
+    rgba(49, 46, 129, 0.6), 
+    rgba(76, 29, 149, 0.6)
+  );
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  border-radius: 20px;
+  padding: 1.5rem 3rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(168, 85, 247, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.scoreboard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(168, 85, 247, 0.3), 
+    transparent
+  );
+  animation: shine 4s infinite;
+}
+
+.scoreboard::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+  animation: pulse-glow 3s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1;
+}
+
+.score-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(168, 85, 247, 0.9);
+  text-shadow: 
+    0 0 10px rgba(168, 85, 247, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.score-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 
+    0 0 20px rgba(168, 85, 247, 0.8),
+    0 0 40px rgba(99, 102, 241, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.8);
+  font-family: 'Arial Black', sans-serif;
+  min-width: 80px;
+  text-align: center;
+  background: linear-gradient(180deg, #fff, #c4b5fd, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: score-pulse 2s ease-in-out infinite;
+  position: relative;
+}
+
+.score-value::before {
+  content: attr(data-value);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, #fff, #c4b5fd, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+@keyframes score-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.score-divider {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(
+    180deg, 
+    transparent, 
+    rgba(168, 85, 247, 0.8), 
+    rgba(99, 102, 241, 0.8),
+    transparent
+  );
+  box-shadow: 
+    0 0 20px rgba(168, 85, 247, 0.6),
+    0 0 40px rgba(99, 102, 241, 0.4);
+  position: relative;
+  animation: divider-glow 2s ease-in-out infinite;
+}
+
+@keyframes divider-glow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; box-shadow: 0 0 30px rgba(168, 85, 247, 0.8), 0 0 60px rgba(99, 102, 241, 0.6); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .scoreboard {
+    padding: 1rem 2rem;
+    gap: 2rem;
+  }
+  
+  .score-value {
+    font-size: 2rem;
+    min-width: 60px;
+  }
+  
+  .score-divider {
+    height: 50px;
+  }
+}
+
+
+.restart-btn {
+  margin-top: 2rem;
+  backdrop-filter: blur(20px);
+  background: linear-gradient(135deg, 
+    rgba(244, 67, 54, 0.9), 
+    rgba(233, 30, 99, 0.9),
+    rgba(156, 39, 176, 0.9)
+  );
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 
+    0 8px 32px rgba(244, 67, 54, 0.4),
+    0 0 60px rgba(233, 30, 99, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  font-family: monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  z-index: 1;
+}
+
+/* Candy removal animations */
+@keyframes candy-pop {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3) rotate(10deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes candy-explode {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.5);
+    filter: brightness(2) saturate(2);
+  }
+  100% {
+    transform: scale(0);
+    filter: brightness(0);
+    opacity: 0;
+  }
+}
+
+@keyframes candy-sparkle {
+  0%, 100% {
+    box-shadow: 
+      0 0 0 rgba(255, 255, 255, 0),
+      0 0 0 rgba(255, 193, 7, 0);
+  }
+  50% {
+    box-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.8),
+      0 0 40px rgba(255, 193, 7, 0.6),
+      inset 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px) rotate(-5deg); }
+  75% { transform: translateX(5px) rotate(5deg); }
+}
+
+.candy-removing {
+  animation: candy-explode 0.5s ease-out forwards, candy-sparkle 0.5s ease-out;
+  z-index: 10;
+}
+
+.candy-match {
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Falling animation for candies moving down */
+@keyframes candy-fall {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.candy-falling {
+  animation: candy-fall 0.4s ease-out;
+}
+
+/* Combo effect */
+@keyframes combo-flash {
+  0%, 100% { 
+    filter: brightness(1);
+  }
+  50% { 
+    filter: brightness(2) saturate(2);
+  }
+}
+
+.combo-effect {
+  animation: combo-flash 0.3s ease-in-out;
+}

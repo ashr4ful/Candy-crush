@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css" title="" type="" />
+  <title></title>
+</head>
+
+<body>
+<div class="container">
+  <div class="scoreboard">
+    <div class="score-item">
+      <div class="score-label">Score</div>
+      <div class="score-value" id="score">0</div>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-item">
+      <div class="score-label">Moves Left</div>
+      <div class="score-value" id="move">20</div>
+    </div>
+  </div>
+  <div class="game-container">
+    <div class="game"></div>
+  </div>
+  
+  <button class="restart-btn" onclick="restartGame()">
+  <span class="restart-icon">↻</span>
+  <span class="restart-text">Restart Game</span>
+  <span class="restart-shine"></span>
+</button>
+</div>
+</body>
+
+<script src="candy.js"></script>
+</html>
